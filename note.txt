@@ -1,0 +1,117 @@
+====================================
+DATABASE TABLES
+====================================
+
+- khassida
+    * id
+    * author_id
+    * arabic_name
+    * page_count
+    * chapter_count
+    * cover_picture
+    * translated_name:
+
+- chapter
+    * id
+    * khassida_id
+    * arabic_name
+    * verse_count
+    * slug
+    * pages[number]
+    * verses: Verse[]
+    * translated_name:
+    * timestamps?: {
+        from:
+        to:
+        duration:
+    }
+
+- KhassidaAudio
+    * id
+    * khassida_id
+    * reciter_id
+    * file_name
+    * duration
+    * audioData: [
+        {
+            verse_number:
+            from:
+            to:
+            duration:
+        },
+        ...
+    ]
+
+- verse
+    * id
+    * chapter_id
+    * verse_number
+    * page_number
+    * verse_key
+    * str
+    * words: word[]
+    * translation: Translation[]
+    * timestamps: {
+        from:
+        to:
+        duration:
+    }
+
+- word 
+    * id
+    * verse_id
+    * page_number
+    * position
+    * location
+    * translation: Translation[]
+    * transliteration: Transliteration[]
+    * text
+
+- Transliteration
+    * id
+    * language_name:
+    * text:
+
+- Translation:
+    * id
+    * language_name:
+    * text:
+    * author:
+
+- Reciter
+    * id
+    * name
+    * picture
+    * bio:Translation[]
+    * translated_names: Translation[]
+
+- Author
+    * id
+    * name
+    * picture
+    * bio:Translation[]
+    * translated_names: Translation[]
+
+====================================
+FOLDER STRUCTURE
+====================================
+
+data
+    -- authors.json
+    -- reciters.json
+    -- khassidas.json
+    -- khassida
+                -- [tariha]
+                            -- [author]
+                                        -- info.json
+                                        -- [ khassida ]
+                                                        -- info.json
+                                                        -- khassida.txt
+                                                        -- traductions
+                                                                    -- [lang]
+                                                                            -- khassida.txt
+    -- audio
+            -- [khassida]
+                        -- [reciter]
+                                    -- audio.mp3
+                                    -- data.json
