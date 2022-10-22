@@ -1,0 +1,65 @@
+{
+  "name": "khilass-zahab",
+  "chapters": [
+    {
+      "name": "Al-Fatiha",
+      "number": 1,
+      "verses": [
+        {
+          "number": 1,
+          "key": "1:1",
+          "text": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+          "words": null,
+          "translations": null
+        },
+        {
+          "number": 2,
+          "key": "1:2",
+          "text": "[All] praise is [due] to Allah, Lord of the worlds -",
+          "words": null,
+          "translations": null
+        },
+        {
+          "number": 3,
+          "key": "1:3",
+          "text": "The Entirely Merciful, the Especially Merciful,",
+          "words": null,
+          "translations": null
+        },
+        {
+          "number": 4,
+          "key": "1:4",
+          "text": "Sovereign of the Day of Recompense.",
+          "words": null,
+          "translations": null
+        },
+        {
+          "number": 5,
+          "key": "1:5",
+          "text": "It is You we worship and You we ask for help.",
+          "words": null,
+          "translations": null
+        },
+        {
+          "number": 6,
+          "key": "1:6",
+          "text": "Guide us to the straight path -",
+          "words": null,
+          "translations": null
+        },
+        {
+          "number": 7,
+          "key": "1:7",
+          "text": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
+          "words": null,
+          "translations": null
+        }
+      ],
+      "start_page": null,
+      "end_page": null,
+      "translated_names": null
+    }
+  ],
+  "translated_names": null,
+  "audios": null
+}

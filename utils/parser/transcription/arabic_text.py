@@ -13,6 +13,9 @@ class ArabicText(LinkedQueue):
 
       def __eq__(self, other):
           return self.char() == other
+      
+      def next(self):
+          return self._parent.after(self)
 
       def char(self):
           return self._node._ele
@@ -42,38 +45,31 @@ class ArabicText(LinkedQueue):
         """
         Determines whether there is an Alif followed by Lam at the given position.
         """
-        return self.is_alif() and self._parent.after(self) == arabic_alphabet.LAM
+        return self.is_alif() and self.next() == arabic_alphabet.LAM
+
+      def is_followed_by_sun(self):
+          lam_node = self.next()
+          if lam_node.next().is_followed_by_shadda():
+              return lam_node.next().char()
+          return False
 
       def is_fatha_followed_by_alif(self):
         try:
-            return self == arabic_alphabet.FATHA and self._parent.after(self).is_alif()
+            return self == arabic_alphabet.FATHA and self.next().is_alif()
         except:
             return False
 
-      def is_followed_by_sun(self):
-          next_node = self._parent.after(self)
-          if self._parent.after(next_node).is_followed_by_shadda():
-              return self._parent.after(next_node).char()
-          return False
-
       def is_followed_by_shadda(self):
-          return self._parent.after(self) == arabic_alphabet.SHADDA
+          return self.next() == arabic_alphabet.SHADDA
 
       def is_kasra_followed_by_ya(self):
-        return self == arabic_alphabet.KASRA and self._parent.after(self) == arabic_alphabet.YA
+        return self == arabic_alphabet.KASRA and self.next() == arabic_alphabet.YA
 
       def is_damma_followed_by_waw(self):
-        return self == arabic_alphabet.DAMMA and self._parent.after(self) == arabic_alphabet.WAW
+        return self == arabic_alphabet.DAMMA and self.next() == arabic_alphabet.WAW
 
       def is_alif_with_madda_above(self):
         return self == arabic_alphabet.ALIF_WITH_MADDA_ABOVE
-
-      def is_alif_with_madda_above(self):
-        return self == arabic_alphabet.ALIF_WITH_MADDA_ABOVE
-
-      def is_alif_with_wasla_above(self):
-        return self == arabic_alphabet.ALIF_WITH_WASLA_ABOVE
-
 
   def __init__(self, text):
     super().__init__()

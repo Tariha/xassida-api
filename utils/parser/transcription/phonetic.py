@@ -110,19 +110,25 @@ def unicode_to_phonetic(string):
             continue
 
         # Handle Al
-        if caracter.is_al():
-            if caracter.is_word_start():
-                string_buffer.write(u'al-')
-            else:
+        if caracter.is_alif():
+            if caracter.is_al():
+                if caracter.is_word_start():
+                    string_buffer.write(u'a')
+
                 if c:=caracter.is_followed_by_sun():
                     string_buffer.write(u''+'-'.join(get_char(c)*2))
                     next(arabic_text)
+
                 else:
                     string_buffer.write(u'l-')
 
-            # Skip the next letter (Lam) because we already processed it.
-            next(arabic_text)
-            continue
+                # Skip the next letter (Lam) because we already processed it.
+                next(arabic_text)
+                continue
+
+            elif caracter.is_word_start():
+                string_buffer.write(u'i')
+                continue
 
         # Handle Alif with Madda
         if caracter.is_alif_with_madda_above():

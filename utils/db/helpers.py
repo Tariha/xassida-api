@@ -1,7 +1,7 @@
 import sys, os, django
 from dataclasses import asdict
 
-sys.path.append('../')
+sys.path.append('../../')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
 django.setup()
 
