@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 @dataclass
@@ -19,7 +19,7 @@ class Audio:
     file: str
     duration: str
     reciter: str
-    verse_timings: List[VerseTiming]
+    verse_timings: List[VerseTiming] = field(default_factory=list)
 
 @dataclass
 class Reciter:
@@ -37,7 +37,7 @@ class Word:
 class VerseTranslation:
     lang: str
     text: str
-    author: str
+    author: str = None
 
 @dataclass
 class Verse:
@@ -45,23 +45,22 @@ class Verse:
     key: str
     text: str
     words: List[Word] = None
-    translations: List[VerseTranslation] = None
+    translations: List[VerseTranslation] = field(default_factory=list)
 
 @dataclass
 class Chapter:
     name: str
     number: int
     verses: List[Verse]
-    start_page: int = None
-    end_page: int = None
-    translated_names: List[TranslatedName] = None
+    translated_names: List[TranslatedName] = field(default_factory=list)
 
 @dataclass
 class Xassida:
     name: str
     chapters: List[Chapter]
-    translated_names: List[TranslatedName] = None
-    audios: List[Audio] = None
+    translated_names: List[TranslatedName] = field(default_factory=list)
+    audios: List[Audio] = field(default_factory=list)
+    translated_lang : List = field(default_factory=list)
 
 @dataclass
 class AuthorInfo:
@@ -73,5 +72,5 @@ class Author:
     name: str
     tariha: str
     xassidas: List[Xassida]
-    infos: List[AuthorInfo] = None 
+    infos: List[AuthorInfo] = field(default_factory=list)
     picture: str = ""

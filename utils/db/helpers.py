@@ -27,7 +27,7 @@ def create_xassidas(data, author):
 
 def create_chapters(data, xassida):
     """Chapter insertion
-       :param xassida a Cassida instance
+       :param xassida a Xassida instance
     """
     obj,_ = Chapter.objects.update_or_create(name=data['name'], xassida=xassida, defaults=data) 
     return obj
