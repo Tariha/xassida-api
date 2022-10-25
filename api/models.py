@@ -76,8 +76,8 @@ class Chapter(models.Model):
     xassida = models.ForeignKey(Xassida, models.CASCADE, related_name="chapters")
     name = models.CharField(max_length=100)
     number = models.IntegerField()
-    start_page = models.IntegerField()
-    end_page = models.IntegerField()
+    start_page = models.IntegerField(blank=True, null=True)
+    end_page = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name

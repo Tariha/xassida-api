@@ -5,6 +5,7 @@ sys.path.append('../../')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
 django.setup()
 
+from django.contrib.contenttypes.models import ContentType
 from api.models import *
 
 def create_author(data, *args):
@@ -22,6 +23,7 @@ def create_infos(data, author):
 
 def create_xassidas(data, author):
     """Xassida insertion"""
+    del data['translated_lang']
     obj,_ = Xassida.objects.update_or_create(name=data['name'], author=author, defaults=data) 
     return obj
 
@@ -78,5 +80,5 @@ def create_translated_names(data, obj):
     """TranslatedName insertion
        :param obj the generic obj
     """
-    obj,_ = Audio.objects.update_or_create(content_type=obj, object_id=obj.pk, defaults=data) 
+    obj,_ = TranslatedName.objects.update_or_create(content_type=ContentType.objects.get_for_model(obj), object_id=obj.pk, defaults=data) 
     return obj

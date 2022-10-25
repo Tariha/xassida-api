@@ -44,6 +44,7 @@ def parse_chapter(lines, lang):
 
     for line in lines:
         if line.startswith("###"):
+            verse_number = 0
             if chapter_number > 0:
                 # retrieve latest parsed verse
                 verse_data = parse_verse(verse_data, verse_text, lang)

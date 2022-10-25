@@ -71,6 +71,6 @@ class AuthorInfo:
 class Author:
     name: str
     tariha: str
-    xassidas: List[Xassida]
-    infos: List[AuthorInfo] = field(default_factory=list)
     picture: str = ""
+    xassidas: List[Xassida] = field(default_factory=list)
+    infos: List[AuthorInfo] = field(default_factory=list)
