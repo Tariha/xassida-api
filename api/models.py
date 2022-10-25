@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
 
@@ -18,6 +18,9 @@ class TranslatedName(models.Model):
     content_type = models.ForeignKey(ContentType, models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __str__(self):
+        return self.transcription
 
     class Meta:
         indexes = [ models.Index(fields=["content_type", "object_id"])]
@@ -62,6 +65,7 @@ class Xassida(models.Model):
     author = models.ForeignKey(Author, models.CASCADE, related_name="xassidas")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    translated_names = GenericRelation(TranslatedName)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -76,8 +80,7 @@ class Chapter(models.Model):
     xassida = models.ForeignKey(Xassida, models.CASCADE, related_name="chapters")
     name = models.CharField(max_length=100)
     number = models.IntegerField()
-    start_page = models.IntegerField(blank=True, null=True)
-    end_page = models.IntegerField(blank=True, null=True)
+    translated_names = GenericRelation(TranslatedName)
 
     def __str__(self):
         return self.name

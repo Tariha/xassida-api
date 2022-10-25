@@ -1,16 +1,10 @@
-# -*- coding: utf-8 -*-
-# Author: Linzo99
-# Mail: xxx@xx
-# Created Time: Wed Oct 12
-
 from rest_framework import serializers
 from .models import *
 
 class TranslatedNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = TranslatedName
-        exclude = []
-        read_only_fields = ['id']
+        exclude = ['id', 'content_type', 'object_id']
 
 # Reciter and Author Serializers
 class ReciterSerializer(serializers.ModelSerializer):
@@ -36,36 +30,36 @@ class AuthorSerializer(serializers.ModelSerializer):
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        exclude = []
+        exclude = ['id', 'verse']
         read_only_fields = ['id']
 
 class VerseTranslationSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerseTranslation
-        exclude = []
+        exclude = ['id', 'verse']
         read_only_fields = ['id']
 
 class VerseSerializer(serializers.ModelSerializer):
-    translation = VerseTranslationSerializer(read_only=True)
+    translations = VerseTranslationSerializer(many=True, read_only=True)
+    words = WordSerializer(many=True, read_only=True)
     class Meta:
         model = Verse
-        exclude = []
+        fields = ['id', 'number', 'key', 'text', 'translations', 'words']
         read_only_fields = ['id']
 
 class ChapterSerializer(serializers.ModelSerializer):
-    verses = VerseSerializer(many=True, read_only=True)
-    #translated_name = TranslatedNameSerializer()
+    #verses = VerseSerializer(many=True, read_only=True)
+    translated_names = TranslatedNameSerializer(many=True, read_only=True)
     class Meta:
         model = Chapter
-        exclude = []
+        fields = ['id', 'name', 'number', 'translated_names']
         read_only_fields = ['id']
 
 class XassidaSerializer(serializers.ModelSerializer):
-    #translated_name = TranslatedNameSerializer()
-    chapters = ChapterSerializer(many=True, read_only=True)
+    translated_names = TranslatedNameSerializer(many=True, read_only=True)
     class Meta:
         model = Xassida
-        exclude = []
+        fields = ['id', 'name', 'slug', 'created', 'modified', 'translated_names']
         read_only_fields = ['id', 'slug']
         
 # Audio Serializers
