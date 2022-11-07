@@ -1,4 +1,5 @@
 from pathlib import Path
+import argparse
 import json
 
 def parse_traduction(file):
@@ -26,6 +27,15 @@ def parse_traduction(file):
 
 
 if __name__ == '__main__':
-    for file in Path("../../data/xassida").glob("**/*.json"):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--tariha", help="The tariha of the authors")
+    parser.add_argument("-a", "--author", help="The author of the xassida")
+    parser.add_argument("-x", "--xassida", help="The xassida")
+    args = parser.parse_args()
+    glob_path =  f"{args.tariha}/" if args.tariha else "*/"
+    glob_path += f"{args.author}/" if args.author else "*/" 
+    glob_path += f"{args.xassida}/**/*.json" if args.xassida else "**/*.json" 
+    # start parsing translations
+    for file in Path("../../data/xassida").glob(glob_path):
         if file.parents[4].stem == "xassida":
             parse_traduction(file)

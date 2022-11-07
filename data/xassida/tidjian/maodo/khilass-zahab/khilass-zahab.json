@@ -6,8 +6,8 @@
       "number": 1,
       "verses": [
         {
-          "number": 1,
-          "key": "1:1",
+          "number": 0,
+          "key": "1:0",
           "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
           "words": [
             {
@@ -33,20 +33,20 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+              "lang": "fr",
+              "text": "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.",
+              "lang": "en",
+              "text": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
               "author": ""
             }
           ]
         },
         {
-          "number": 2,
-          "key": "1:2",
+          "number": 1,
+          "key": "1:1",
           "text": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
           "words": [
             {
@@ -72,20 +72,20 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "[All] praise is [due] to Allah, Lord of the worlds -",
+              "lang": "fr",
+              "text": "Louange à Allah, Seigneur de l'univers.",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "Louange à Allah, Seigneur de l'univers.",
+              "lang": "en",
+              "text": "[All] praise is [due] to Allah, Lord of the worlds -",
               "author": ""
             }
           ]
         },
         {
-          "number": 3,
-          "key": "1:3",
+          "number": 2,
+          "key": "1:2",
           "text": "الرَّحْمَٰنِ الرَّحِيمِ",
           "words": [
             {
@@ -101,20 +101,20 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "The Entirely Merciful, the Especially Merciful,",
+              "lang": "fr",
+              "text": "Le Tout Miséricordieux, le Très Miséricordieux,",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "Le Tout Miséricordieux, le Très Miséricordieux,",
+              "lang": "en",
+              "text": "The Entirely Merciful, the Especially Merciful,",
               "author": ""
             }
           ]
         },
         {
-          "number": 4,
-          "key": "1:4",
+          "number": 3,
+          "key": "1:3",
           "text": "مَالِكِ يَوْمِ الدِّينِ",
           "words": [
             {
@@ -135,20 +135,20 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "Sovereign of the Day of Recompense.",
+              "lang": "fr",
+              "text": "Maître du Jour de la rétribution.",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "Maître du Jour de la rétribution.",
+              "lang": "en",
+              "text": "Sovereign of the Day of Recompense.",
               "author": ""
             }
           ]
         },
         {
-          "number": 5,
-          "key": "1:5",
+          "number": 4,
+          "key": "1:4",
           "text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
           "words": [
             {
@@ -174,20 +174,20 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "It is You we worship and You we ask for help.",
+              "lang": "fr",
+              "text": "C'est Toi [Seul] que nous adorons, et c'est Toi [Seul] dont nous implorons secours.",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "C'est Toi [Seul] que nous adorons, et c'est Toi [Seul] dont nous implorons secours.",
+              "lang": "en",
+              "text": "It is You we worship and You we ask for help.",
               "author": ""
             }
           ]
         },
         {
-          "number": 6,
-          "key": "1:6",
+          "number": 5,
+          "key": "1:5",
           "text": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
           "words": [
             {
@@ -208,20 +208,20 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "Guide us to the straight path -",
+              "lang": "fr",
+              "text": "Guide-nous dans le droit chemin,",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "Guide-nous dans le droit chemin,",
+              "lang": "en",
+              "text": "Guide us to the straight path -",
               "author": ""
             }
           ]
         },
         {
-          "number": 7,
-          "key": "1:7",
+          "number": 6,
+          "key": "1:6",
           "text": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
           "words": [
             {
@@ -272,13 +272,13 @@
           ],
           "translations": [
             {
-              "lang": "en",
-              "text": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
+              "lang": "fr",
+              "text": "le chemin de ceux que Tu as comblés de faveurs, non pas de ceux qui ont encouru Ta colère, ni des égarés.",
               "author": ""
             },
             {
-              "lang": "fr",
-              "text": "le chemin de ceux que Tu as comblés de faveurs, non pas de ceux qui ont encouru Ta colère, ni des égarés.",
+              "lang": "en",
+              "text": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
               "author": ""
             }
           ]
@@ -286,12 +286,12 @@
       ],
       "translated_names": [
         {
-          "lang": "en",
+          "lang": "fr",
           "translation": "Al-Fatiha",
           "transcription": ""
         },
         {
-          "lang": "fr",
+          "lang": "en",
           "translation": "Al-Fatiha",
           "transcription": ""
         }
@@ -301,7 +301,7 @@
   "translated_names": [],
   "audios": [],
   "translated_lang": [
-    "en",
-    "fr"
+    "fr",
+    "en"
   ]
 }

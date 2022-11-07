@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-# Author: xxx
-# Mail: xxx@xx
-# Created Time: Wed Oct 05
 from dataclasses import asdict
+from itertools import groupby
 from pathlib import Path
 from transcription.phonetic import unicode_to_phonetic 
-from models import *
+from models import Xassida, Chapter, Verse, Word 
+import argparse
+import sys
 import json
 
 def parse_xassida(file, depth):
@@ -15,7 +14,6 @@ def parse_xassida(file, depth):
     """
     xassida = file.absolute().parents[depth]
     author = xassida.parent
-    tariha = author.parent
     print("Parsing %s "%(file.parent))
     # parse the chapters with verses and words
     xassida_data = {"name":xassida.stem}
@@ -24,9 +22,8 @@ def parse_xassida(file, depth):
     # save the parsed xassida as json
     result = asdict(Xassida(**xassida_data))
     file = xassida if depth == 0 else file.parent
-    out_file = file / f'{xassida.stem}.json' 
+    out_file = file / f'{xassida.stem}.json'
     out_file.write_text(json.dumps(result, ensure_ascii=False))
-
 
 def parse_file(file, depth):
     """Parse the file"""
@@ -34,58 +31,40 @@ def parse_file(file, depth):
     lines = file.read_bytes().decode("utf-8").split("\n")
     return parse_chapter(lines, lang)
 
-
 def parse_chapter(lines, lang):
-    """Parse the chapters"""
     chapters = []
-    chapter_number = 0
-    verse_number = 0
-    verse_text = ''
-
-    for line in lines:
-        if line.startswith("###"):
-            verse_number = 0
-            if chapter_number > 0:
-                # retrieve latest parsed verse
-                verse_data = parse_verse(verse_data, verse_text, lang)
-                verses.append(verse_data)
-                chapter_data['verses'] = list(map(lambda v:Verse(**v), verses))
-                chapters.append(chapter_data)
-
-            verses = []
-            chapter_number += 1
-            chapter_data = {'name':line[3:].strip(), 'number':chapter_number}
-
-        elif line.strip() == "##":
-            if verse_number > 0:
-                verse_data = parse_verse(verse_data, verse_text, lang)
-                verses.append(verse_data)
-
-            verse_text = ''
-            verse_number += 1
-            verse_data = {'number':verse_number, 'key':f"{chapter_number}:{verse_number}"}
-
+    chap_number = 0
+    for is_chap, vers in groupby(lines, key=lambda x:x.startswith("###")):
+        # if k == True means that its a chapter
+        if is_chap:
+            chap_number += 1
+            chapters.append({'name':next(vers)[3:].strip(), 'number':chap_number})
         else:
-            verse_text += line.strip()+' '
-
-    if verse_text:
-        verse_data = parse_verse(verse_data, verse_text, lang)
-        verses.append(verse_data)
-
-        chapter_data['verses'] = list(map(lambda v:Verse(**v), verses))
-        chapters.append(chapter_data)
+            verses = filter(len, "".join(vers).split("##"))
+            verses_data = map(lambda v:parse_verse(v[1], v[0], chap_number, lang), enumerate(verses))
+            chapters[-1]['verses'] = list(verses_data)
 
     return chapters
 
-def parse_verse(verse_data, verse_text, lang):
-    verse_data['text'] = verse_text.rstrip()
-    phonetic_text = unicode_to_phonetic(verse_data['text']).split()
+def parse_verse(verse, i, chap_number, lang):
+    verse = verse.strip()
+    words = verse.split() 
+    verse_data = {'number':i, 'key':f"{chap_number}:{i}", 'text':verse}
     if not lang:
-        verse_data['words'] = list(map(lambda x:Word(*x, phonetic_text[x[0]]), enumerate(verse_text.split())))
-    return verse_data
-
+        phonetic = unicode_to_phonetic(verse).split()
+        verse_data['words'] = list(map(lambda x:Word(*x, phonetic[x[0]]), enumerate(words)))
+    return Verse(**verse_data)
 
 if __name__ == '__main__':
-    for file in Path("../../data/xassida").glob("**/*.txt"):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--tariha", help="The tariha of the authors")
+    parser.add_argument("-a", "--author", help="The author of the xassida")
+    parser.add_argument("-x", "--xassida", help="The xassida")
+    args = parser.parse_args()
+    glob_path =  f"{args.tariha}/" if args.tariha else "*/"
+    glob_path += f"{args.author}/" if args.author else "*/" 
+    glob_path += f"{args.xassida}/**/*.txt" if args.xassida else "**/*.txt" 
+    # start parsing files
+    for file in Path("../../data/xassida").glob(glob_path):
         depth = 1 if file.parents[4].stem=="xassida" else 0
         parse_xassida(file, depth)

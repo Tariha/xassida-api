@@ -1,6 +1,7 @@
 from pathlib import Path
 from models import Author
 from dataclasses import asdict
+import argparse
 import json
 
 def parse_author_data(file):
@@ -15,5 +16,12 @@ def parse_author_data(file):
 
 
 if __name__ == '__main__':
-    for file in Path("../../data/xassida").glob("*/*"):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--tariha", help="The tariha of the authors")
+    parser.add_argument("-a", "--author", help="The author of the xassida")
+    args = parser.parse_args()
+    glob_path =  f"{args.tariha}/" if args.tariha else "*/"
+    glob_path += f"{args.author}/" if args.author else "*/" 
+    # start parsing
+    for file in Path("../../data/xassida").glob(glob_path):
         parse_author_data(file)
