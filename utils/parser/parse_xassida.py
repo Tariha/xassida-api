@@ -1,11 +1,13 @@
+import argparse
+import json
+import sys
 from dataclasses import asdict
 from itertools import groupby
 from pathlib import Path
-from transcription.phonetic import unicode_to_phonetic 
-from models import Xassida, Chapter, Verse, Word 
-import argparse
-import sys
-import json
+
+from models import Chapter, Verse, Word, Xassida
+from transcription.phonetic import unicode_to_phonetic
+
 
 def parse_xassida(file, depth):
     """Parse a single xassida file or xassida translation folder
@@ -41,17 +43,17 @@ def parse_chapter(lines, lang):
             chapters.append({'name':next(vers)[3:].strip(), 'number':chap_number})
         else:
             verses = filter(len, "".join(vers).split("##"))
-            verses_data = map(lambda v:parse_verse(v[1], v[0], chap_number, lang), enumerate(verses))
+            verses_data = map(lambda v:parse_verse(*v, chap_number, lang), enumerate(verses))
             chapters[-1]['verses'] = list(verses_data)
 
     return chapters
 
-def parse_verse(verse, i, chap_number, lang):
+def parse_verse(i, verse, chap_number, lang):
     verse = verse.strip()
-    words = verse.split() 
+    words = list(filter(len, verse.split()))
     verse_data = {'number':i, 'key':f"{chap_number}:{i}", 'text':verse}
     if not lang:
-        phonetic = unicode_to_phonetic(verse).split()
+        phonetic = unicode_to_phonetic(" ".join(words)).split()
         verse_data['words'] = list(map(lambda x:Word(*x, phonetic[x[0]]), enumerate(words)))
     return Verse(**verse_data)
 

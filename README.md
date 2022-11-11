@@ -78,7 +78,7 @@ xassidas and "xassida tranlsations" files must respect this format
   
   Ex:
 
-![example.png](/Users/mac/repos/tariha-api/data/example.png)
+![example.png](data/example.png)
 
 ##### Parsers
 
@@ -97,7 +97,7 @@ xassidas and "xassida tranlsations" files must respect this format
   the **json parsed xassida file**
   
   ```bash
-  python parse_translation.py [-t] [-a] [-x]
+  python parse_translations.py [-t] [-a] [-x]
   ```
 
 + **parse_author.py**:

@@ -1,12 +1,17 @@
-import sys, os, django
+import os
+import sys
 from dataclasses import asdict
+
+import django
 
 sys.path.append('../../')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
 django.setup()
 
 from django.contrib.contenttypes.models import ContentType
+
 from api.models import *
+
 
 def create_author(data, *args):
     """Author insertion

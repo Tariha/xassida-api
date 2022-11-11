@@ -1,6 +1,7 @@
-from pathlib import Path
 import argparse
 import json
+from pathlib import Path
+
 
 def parse_traduction(file):
     """ Parse the translation for each arab verse """

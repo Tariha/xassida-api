@@ -1,6 +1,8 @@
-from pathlib import Path
 import json
+from pathlib import Path
+
 import helpers
+
 
 def handle_recursive_insert(datas, fn, arg=None):
     if not type(datas) is list:

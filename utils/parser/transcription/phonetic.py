@@ -1,11 +1,7 @@
-# The following letters have different rules depending on the context in the
-# ALA-LC transcription:
-# Hamza
-# Ta' Marbuta
-
 from io import StringIO
-from .arabic_text import ArabicText
+
 from . import arabic_alphabet
+from .arabic_text import ArabicText
 
 __unicode_to_phonetic_map = {
     arabic_alphabet.HAMZA: u'\'',
@@ -144,19 +140,19 @@ def unicode_to_phonetic(string):
 
         if caracter.is_fatha_followed_by_alif():
             # Treat like an Alif.
-            string_buffer.write(__unicode_to_phonetic_map[arabic_alphabet.ALIF])
+            string_buffer.write(get_char(arabic_alphabet.ALIF))
             next(arabic_text)
             continue
 
         if caracter.is_kasra_followed_by_ya():
             # Treat like a Ya
-            string_buffer.write(__unicode_to_phonetic_map[arabic_alphabet.YA])
+            string_buffer.write(get_char(arabic_alphabet.YA))
             next(arabic_text)
             continue
 
         if caracter.is_damma_followed_by_waw():
             # Treat like a Waw
-            string_buffer.write(__unicode_to_phonetic_map[arabic_alphabet.WAW])
+            string_buffer.write(get_char(arabic_alphabet.WAW))
             next(arabic_text)
             continue
 
@@ -165,7 +161,7 @@ def unicode_to_phonetic(string):
             count = 1
             if caracter.is_followed_by_shadda():
                 count = 2
-            string_buffer.write(__unicode_to_phonetic_map[caracter.char()]*count)
+            string_buffer.write(get_char(caracter.char())*count)
 
     phonetic = string_buffer.getvalue()
     # TODO: Need to ensure we close the string buffer if an exception happens
