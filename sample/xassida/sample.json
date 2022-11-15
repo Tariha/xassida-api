@@ -1,5 +1,5 @@
 {
-  "name": "khilass-zahab",
+  "name": "sample",
   "chapters": [
     {
       "name": "الفاتحة",
@@ -34,11 +34,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
               "author": ""
             }
@@ -73,11 +68,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "Louange à Allah, Seigneur de l'univers.",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "[All] praise is [due] to Allah, Lord of the worlds -",
               "author": ""
             }
@@ -102,11 +92,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "Le Tout Miséricordieux, le Très Miséricordieux,",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "The Entirely Merciful, the Especially Merciful,",
               "author": ""
             }
@@ -136,11 +121,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "Maître du Jour de la rétribution.",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "Sovereign of the Day of Recompense.",
               "author": ""
             }
@@ -175,11 +155,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "C'est Toi [Seul] que nous adorons, et c'est Toi [Seul] dont nous implorons secours.",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "It is You we worship and You we ask for help.",
               "author": ""
             }
@@ -209,11 +184,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "Guide-nous dans le droit chemin,",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "Guide us to the straight path -",
               "author": ""
             }
@@ -273,11 +243,6 @@
           "translations": [
             {
               "lang": "fr",
-              "text": "le chemin de ceux que Tu as comblés de faveurs, non pas de ceux qui ont encouru Ta colère, ni des égarés.",
-              "author": ""
-            },
-            {
-              "lang": "en",
               "text": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
               "author": ""
             }
@@ -289,11 +254,6 @@
           "lang": "fr",
           "translation": "Al-Fatiha",
           "transcription": ""
-        },
-        {
-          "lang": "en",
-          "translation": "Al-Fatiha",
-          "transcription": ""
         }
       ]
     }
@@ -301,7 +261,6 @@
   "translated_names": [],
   "audios": [],
   "translated_lang": [
-    "fr",
-    "en"
+    "fr"
   ]
 }

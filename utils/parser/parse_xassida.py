@@ -31,6 +31,7 @@ def parse_file(file, depth):
     """Parse the file"""
     lang = False if depth == 0 else True
     lines = file.read_bytes().decode("utf-8").split("\n")
+    lines = [l+" " for l in lines]
     return parse_chapter(lines, lang)
 
 def parse_chapter(lines, lang):
