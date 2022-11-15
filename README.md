@@ -58,7 +58,7 @@ This API aims to make it easy for anyone to read, study, and learn xassidas of d
 └── xassida
 ```
 
-#### Global usage
+### Global usage
 
 #### Server
 
@@ -66,9 +66,9 @@ This API aims to make it easy for anyone to read, study, and learn xassidas of d
 python manage.py runserver
 ```
 
-##### Data collection
+#### Data collection
 
-###### Text Format ( xassida and xassida-translation )
+##### Text Format ( xassida and xassida-translation )
 
 xassidas and "xassida tranlsations" files must respect this format
 
@@ -80,7 +80,7 @@ xassidas and "xassida tranlsations" files must respect this format
 
 ![example.png](data/example.png)
 
-##### Parsers
+#### Parsers
   While parsing xassidas the transcription is automatically generated
   therefore **Diacritics** should be present and respected
 
@@ -88,56 +88,56 @@ xassidas and "xassida tranlsations" files must respect this format
   
     parse a text-formatted xassida and "xassida translation" to json object
   
-  ```bash
-  python parse_xassida.py [-t] [-a] [-x]
-  ```
-  json output
-  ```json
-  {
-    "name": "sample",
-    "chapters": [
-      {
-        "name": "الفاتحة",
-        "number": 1,
-        "verses": [
-          {
-            "number": 0,
-            "key": "1:0",
-            "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-            "words": [
-              {
-                "position": 0,
-                "text": "بِسْمِ",
-                "transcription": "bismi"
-              },
-              {
-                "position": 1,
-                "text": "اللَّهِ",
-                "transcription": "l-lahi"
-              },
-              {
-                "position": 2,
-                "text": "الرَّحْمَٰنِ",
-                "transcription": "r-raḥmāni"
-              },
-              {
-                "position": 3,
-                "text": "الرَّحِيمِ",
-                "transcription": "r-raḥīmi"
-              }
-            ],
-            "translations": []
-          },
-          ...
-        ],
-      },
-      ...
-    ],
-    "translated_names": [],
-    "audios": [],
-    "translated_lang": []
-  }
- ```
+    ```bash
+    python parse_xassida.py [-t] [-a] [-x]
+    ```
+    json output
+    ```json
+    {
+      "name": "sample",
+      "chapters": [
+        {
+          "name": "الفاتحة",
+          "number": 1,
+          "verses": [
+            {
+              "number": 0,
+              "key": "1:0",
+              "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+              "words": [
+                {
+                  "position": 0,
+                  "text": "بِسْمِ",
+                  "transcription": "bismi"
+                },
+                {
+                  "position": 1,
+                  "text": "اللَّهِ",
+                  "transcription": "l-lahi"
+                },
+                {
+                  "position": 2,
+                  "text": "الرَّحْمَٰنِ",
+                  "transcription": "r-raḥmāni"
+                },
+                {
+                  "position": 3,
+                  "text": "الرَّحِيمِ",
+                  "transcription": "r-raḥīmi"
+                }
+              ],
+              "translations": []
+            },
+            ...
+          ],
+        },
+        ...
+      ],
+      "translated_names": [],
+      "audios": [],
+      "translated_lang": []
+      }
+     ```
   
 + **parse_translation.py**:
   
