@@ -1,0 +1,6 @@
+[submodule "utils/parser/utils/parser/transliterator"]
+	path = utils/parser/utils/parser/transliterator
+	url = https://github.com/Linzo99/Arab_transcription.git
+[submodule "utils/parser/transliterator"]
+	path = utils/parser/transliterator
+	url = https://github.com/Linzo99/Arab_transcription.git

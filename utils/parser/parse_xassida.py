@@ -6,7 +6,9 @@ from itertools import groupby
 from pathlib import Path
 
 from models import Chapter, Verse, Word, Xassida
-from transcription.phonetic import unicode_to_phonetic
+from transliterator.transliterator import ArabTransliterator
+
+to_unicode = ArabTransliterator()
 
 
 def parse_xassida(file, depth):
@@ -54,7 +56,7 @@ def parse_verse(i, verse, chap_number, lang):
     words = list(filter(len, verse.split()))
     verse_data = {'number':i, 'key':f"{chap_number}:{i}", 'text':verse}
     if not lang:
-        phonetic = unicode_to_phonetic(" ".join(words)).split()
+        phonetic = to_unicode.translate(" ".join(words)).split()
         verse_data['words'] = list(map(lambda x:Word(*x, phonetic[x[0]]), enumerate(words)))
     return Verse(**verse_data)
 
