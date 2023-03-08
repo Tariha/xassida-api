@@ -4,3 +4,9 @@
 [submodule "utils/parser/transliterator"]
 	path = utils/parser/transliterator
 	url = https://github.com/Linzo99/Arab_transcription.git
+[submodule "datas"]
+	path = datas
+	url = git@github.com:Tariha/xassidas.git
+[submodule "data"]
+	path = data
+	url = git@github.com:Tariha/xassidas.git
