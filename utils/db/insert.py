@@ -19,7 +19,7 @@ def handle_recursive_insert(datas, fn, arg=None):
             handle_recursive_insert(*nest)
 
 if __name__ == '__main__':
-    for file in Path("../../data/xassida").glob("*/*/*.json"):
+    for file in Path("../../data/xassidas").glob("*/*/*.json"):
         print("Inserting to db %s xassidas"%(file.parent.stem))
         data = json.loads(file.read_text())
         handle_recursive_insert(data, helpers.create_author)

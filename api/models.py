@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
 
 class EnumTariha(models.TextChoices):
-    TIDJIAN = ("tidjian", "Tidjian")
+    TIDJIAN = ("tidjan", "Tidjan")
     MOURIDE = ("mouride", "Mouride")
     NIASSENE = ("niassene", "Niassene")
     LAYENE = ("layene", "Layene")
