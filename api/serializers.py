@@ -50,16 +50,22 @@ class VerseSerializer(serializers.ModelSerializer):
 class ChapterSerializer(serializers.ModelSerializer):
     #verses = VerseSerializer(many=True, read_only=True)
     translated_names = TranslatedNameSerializer(many=True, read_only=True)
+    verse_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Chapter
-        fields = ['id', 'name', 'number', 'translated_names']
+        fields = ['id', 'name', 'number', 'translated_names', 'verse_count']
         read_only_fields = ['id']
+
+    def get_verse_count(self, obj):
+        return len(obj.verses.all())
 
 class XassidaSerializer(serializers.ModelSerializer):
     translated_names = TranslatedNameSerializer(many=True, read_only=True)
+    author = AuthorSerializer()
     class Meta:
         model = Xassida
-        fields = ['id', 'name', 'slug', 'created', 'modified', 'translated_names']
+        fields = ['id','author','name', 'slug', 'created', 'modified', 'translated_names', 'chapters']
         read_only_fields = ['id', 'slug']
         
 # Audio Serializers

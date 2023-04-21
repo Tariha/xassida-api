@@ -28,6 +28,7 @@ def create_infos(data, author):
 
 def create_xassidas(data, author):
     """Xassida insertion"""
+    author = Author.objects.get(name=author) if(type(author) is str) else author
     del data['translated_lang']
     obj,_ = Xassida.objects.update_or_create(name=data['name'], author=author, defaults=data) 
     return obj
@@ -36,7 +37,7 @@ def create_chapters(data, xassida):
     """Chapter insertion
        :param xassida a Xassida instance
     """
-    obj,_ = Chapter.objects.update_or_create(name=data['name'], xassida=xassida, defaults=data) 
+    obj,_ = Chapter.objects.update_or_create(number=data['number'], xassida=xassida, defaults=data) 
     return obj
 
 def create_verses(data, chapter):

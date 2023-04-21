@@ -5,11 +5,9 @@ from django.urls import path, include
 from rest_framework_nested import routers
 from .views import (
     XassidaViewSet,
-    ChapterViewSet,
-    VerseViewSet,
     ReciterViewSet,
     AuthorViewSet,
-    AudioViewSet,
+    ChapterViewSet,
 )
 
 router = routers.SimpleRouter()
@@ -22,5 +20,8 @@ router.register(r'reciters', ReciterViewSet, basename='reciter')
 
 # Register Author routes
 router.register(r'authors', AuthorViewSet, basename='author')
+
+# Register Chapter routes
+router.register(r'chapters', ChapterViewSet, basename='chapters')
 
 urlpatterns = router.urls 

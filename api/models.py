@@ -85,6 +85,8 @@ class Chapter(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["number"]
 
 class Verse(models.Model):
     """Verse Model"""
@@ -95,6 +97,9 @@ class Verse(models.Model):
 
     def __str__(self):
         return self.key
+
+    class Meta:
+        ordering = ["number"]
 
 
 class VerseTranslation(models.Model):
