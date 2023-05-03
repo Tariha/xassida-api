@@ -7,6 +7,7 @@ from .views import (
     XassidaViewSet,
     ReciterViewSet,
     AuthorViewSet,
+    AuthorInfoViewSet,
     ChapterViewSet,
 )
 
@@ -20,6 +21,9 @@ router.register(r'reciters', ReciterViewSet, basename='reciter')
 
 # Register Author routes
 router.register(r'authors', AuthorViewSet, basename='author')
+
+# Register AuthorInfo routes
+router.register(r'infos', AuthorInfoViewSet, basename='info')
 
 # Register Chapter routes
 router.register(r'chapters', ChapterViewSet, basename='chapters')

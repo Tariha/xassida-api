@@ -1,8 +1,10 @@
 import os
 import sys
 from dataclasses import asdict
+from pathlib import Path
 
 import django
+from django.core.files import File
 
 sys.path.append('../../')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
@@ -16,7 +18,15 @@ from api.models import *
 def create_author(data, *args):
     """Author insertion
     """
+    imgPath = f"{data['tariha']}/{data['name']}"
+    img =  list(Path("../../data/xassidas/"+imgPath).glob("profile.*"))
+    if img:
+        f = open(str(img[0]), 'rb')
+        data['picture'] = File(f, data['name'])
     obj,_ = Author.objects.update_or_create(name=data['name'], tariha=data['tariha'], defaults=data) 
+    try:
+        f.close()
+    except: pass
     return obj
 
 def create_infos(data, author):

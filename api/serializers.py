@@ -26,6 +26,27 @@ class AuthorSerializer(serializers.ModelSerializer):
         exclude = []
         read_only_fields = ['id', 'slug']
 
+class AuthorWithInfoSerializer(serializers.ModelSerializer):
+    info = serializers.SerializerMethodField()
+    class Meta:
+        model = Author
+        exclude = []
+        read_only_fields = ['id', 'slug']
+
+    def get_info(self, obj):
+        try:
+            author_info = obj.infos.get(lang="fr")
+        except:
+            author_info = None
+        return AuthorInfoSerializer(author_info, many=False).data
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        request = self.context['request']
+        ret['picture'] = request.build_absolute_uri(ret['picture'])
+        return ret
+
+
 # Xassida Serializers
 class WordSerializer(serializers.ModelSerializer):
     class Meta:

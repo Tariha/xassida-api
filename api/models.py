@@ -3,11 +3,16 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
 
+
+
+def upload_path(instance, filename):
+    return f"assets/{filename}"
+
 class EnumTariha(models.TextChoices):
     TIDJIAN = ("tidjan", "Tidjan")
     MOURIDE = ("mouride", "Mouride")
     NIASSENE = ("niassene", "Niassene")
-    LAYENE = ("layene", "Layene")
+    LAYENE = ("layenne", "Layene")
     KHADRE = ("khadre", "Khadre")
 
 # Create your models here.
@@ -42,7 +47,7 @@ class Author(models.Model):
     """Author Model"""
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
-    picture = models.ImageField(blank=True, null=True)
+    picture = models.ImageField(upload_to=upload_path, blank=True, null=True)
     tariha = models.CharField(max_length=15, choices=EnumTariha.choices)
 
     def save(self, *args, **kwargs):
