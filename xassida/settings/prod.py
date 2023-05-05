@@ -3,7 +3,7 @@
 
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 ADMINS = (
        ('Alioune Sall', 'sallalioune99@gmail.com'),
@@ -13,9 +13,9 @@ ADMINS = (
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "linzo",
-        "PASSWORD": "passer",
+        "NAME": "xassidas",
+        "USER": "postgres",
+        "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "5432",
     }
