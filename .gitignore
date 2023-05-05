@@ -4,3 +4,5 @@ quran-simple.txt
 env/
 .DS_Store
 .ipynb_checkpoints
+static
+.ansible

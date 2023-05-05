@@ -1,12 +1,17 @@
 asgiref==3.5.2
-django==4.1.3
+Django==4.1.3
+django-cors-headers==3.14.0
 django-filter==22.1
 django-restframework==0.0.1
 djangorestframework==3.14.0
+drf-nested-routers==0.93.4
+gunicorn==20.1.0
 importlib-metadata==5.0.0
 Markdown==3.4.1
 Pillow==9.3.0
+psycopg2==2.9.6
 pytz==2022.6
 sqlparse==0.4.3
+transcription @ git+https://git@github.com/Tariha/transcription.git@dfe1f2aa1d2a9f1907386e1b6393e0bfbe4a52b1
+typing_extensions==4.5.0
 zipp==3.10.0
-

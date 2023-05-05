@@ -6,7 +6,7 @@ from django.utils.text import slugify
 
 
 def upload_path(instance, filename):
-    return f"assets/{filename}"
+    return f"{filename}"
 
 class EnumTariha(models.TextChoices):
     TIDJIAN = ("tidjan", "Tidjan")
@@ -65,7 +65,7 @@ class AuthorInfo(models.Model):
 
 class Xassida(models.Model):
     """Xassida Model"""
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, null=True)
     author = models.ForeignKey(Author, models.CASCADE, related_name="xassidas")
     created = models.DateTimeField(auto_now_add=True)
@@ -79,11 +79,14 @@ class Xassida(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["modified"]
+
 
 class Chapter(models.Model):
     """Chapter Model"""
     xassida = models.ForeignKey(Xassida, models.CASCADE, related_name="chapters")
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     number = models.IntegerField()
     translated_names = GenericRelation(TranslatedName)
 
@@ -123,6 +126,9 @@ class Word(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ["position"]
 
 
 class Audio(models.Model):
