@@ -5,38 +5,48 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('api', '0005_remove_chapter_end_page_remove_chapter_start_page'),
+        ("api", "0005_remove_chapter_end_page_remove_chapter_start_page"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='chapter',
-            options={'ordering': ['number']},
+            name="chapter",
+            options={"ordering": ["number"]},
         ),
         migrations.AlterModelOptions(
-            name='verse',
-            options={'ordering': ['number']},
+            name="verse",
+            options={"ordering": ["number"]},
         ),
         migrations.AlterField(
-            model_name='author',
-            name='picture',
-            field=models.ImageField(blank=True, null=True, upload_to=api.models.upload_path),
+            model_name="author",
+            name="picture",
+            field=models.ImageField(
+                blank=True, null=True, upload_to=api.models.upload_path
+            ),
         ),
         migrations.AlterField(
-            model_name='author',
-            name='tariha',
-            field=models.CharField(choices=[('tidjan', 'Tidjan'), ('mouride', 'Mouride'), ('niassene', 'Niassene'), ('layenne', 'Layene'), ('khadre', 'Khadre')], max_length=15),
+            model_name="author",
+            name="tariha",
+            field=models.CharField(
+                choices=[
+                    ("tidjan", "Tidjan"),
+                    ("mouride", "Mouride"),
+                    ("niassene", "Niassene"),
+                    ("layenne", "Layene"),
+                    ("khadre", "Khadre"),
+                ],
+                max_length=15,
+            ),
         ),
         migrations.AlterField(
-            model_name='chapter',
-            name='name',
+            model_name="chapter",
+            name="name",
             field=models.CharField(max_length=255),
         ),
         migrations.AlterField(
-            model_name='xassida',
-            name='name',
+            model_name="xassida",
+            name="name",
             field=models.CharField(max_length=255),
         ),
     ]

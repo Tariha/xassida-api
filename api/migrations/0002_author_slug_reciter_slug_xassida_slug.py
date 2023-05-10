@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('api', '0001_initial'),
+        ("api", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='author',
-            name='slug',
+            model_name="author",
+            name="slug",
             field=models.SlugField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='reciter',
-            name='slug',
+            model_name="reciter",
+            name="slug",
             field=models.SlugField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='xassida',
-            name='slug',
+            model_name="xassida",
+            name="slug",
             field=models.SlugField(blank=True, null=True),
         ),
     ]

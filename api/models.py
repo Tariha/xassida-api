@@ -4,9 +4,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
 
 
-
 def upload_path(instance, filename):
     return f"{filename}"
+
 
 class EnumTariha(models.TextChoices):
     TIDJIAN = ("tidjan", "Tidjan")
@@ -15,6 +15,7 @@ class EnumTariha(models.TextChoices):
     LAYENE = ("layenne", "Layene")
     KHADRE = ("khadre", "Khadre")
 
+
 # Create your models here.
 class TranslatedName(models.Model):
     lang = models.CharField(max_length=2)
@@ -22,16 +23,18 @@ class TranslatedName(models.Model):
     translation = models.CharField(max_length=100, blank=True, null=True)
     content_type = models.ForeignKey(ContentType, models.CASCADE)
     object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey("content_type", "object_id")
 
     def __str__(self):
         return self.transcription
 
     class Meta:
-        indexes = [ models.Index(fields=["content_type", "object_id"])]
+        indexes = [models.Index(fields=["content_type", "object_id"])]
+
 
 class Reciter(models.Model):
     """Reciter Model"""
+
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
     picture = models.ImageField(blank=True, null=True)
@@ -43,8 +46,10 @@ class Reciter(models.Model):
     def __str__(self):
         return self.name
 
+
 class Author(models.Model):
     """Author Model"""
+
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
     picture = models.ImageField(upload_to=upload_path, blank=True, null=True)
@@ -57,14 +62,18 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+
 class AuthorInfo(models.Model):
     """AuthorInfo Model"""
+
     author = models.ForeignKey(Author, models.CASCADE, related_name="infos")
     lang = models.CharField(max_length=2)
     text = models.TextField()
 
+
 class Xassida(models.Model):
     """Xassida Model"""
+
     name = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, null=True)
     author = models.ForeignKey(Author, models.CASCADE, related_name="xassidas")
@@ -80,11 +89,12 @@ class Xassida(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["modified"]
+        ordering = ["-modified"]
 
 
 class Chapter(models.Model):
     """Chapter Model"""
+
     xassida = models.ForeignKey(Xassida, models.CASCADE, related_name="chapters")
     name = models.CharField(max_length=255)
     number = models.IntegerField()
@@ -96,8 +106,10 @@ class Chapter(models.Model):
     class Meta:
         ordering = ["number"]
 
+
 class Verse(models.Model):
     """Verse Model"""
+
     chapter = models.ForeignKey(Chapter, models.CASCADE, related_name="verses")
     number = models.IntegerField()
     key = models.CharField(max_length=10)
@@ -112,13 +124,16 @@ class Verse(models.Model):
 
 class VerseTranslation(models.Model):
     """VerseTranslation Model"""
+
     verse = models.ForeignKey(Verse, models.CASCADE, related_name="translations")
     lang = models.CharField(max_length=2)
     text = models.TextField()
     author = models.CharField(max_length=100)
 
+
 class Word(models.Model):
     """Word Model"""
+
     verse = models.ForeignKey(Verse, models.CASCADE, related_name="words")
     position = models.IntegerField(blank=True, null=True)
     text = models.CharField(max_length=50)
@@ -133,14 +148,16 @@ class Word(models.Model):
 
 class Audio(models.Model):
     """Audio Model"""
+
     xassida = models.ForeignKey(Xassida, models.CASCADE, related_name="audios")
     reciter = models.ForeignKey(Reciter, models.CASCADE, related_name="audios")
     file = models.FileField()
     duration = models.DurationField(blank=True)
 
+
 class VerseTiming(models.Model):
     audio = models.ForeignKey(Audio, models.CASCADE, related_name="verse_timings")
-    verse_number = models.CharField(max_length=10, blank=True, null=True) 
-    timestamp_from =  models.DurationField()
-    timestamp_to =  models.DurationField()
-    duration =  models.DurationField(blank=True)
+    verse_number = models.CharField(max_length=10, blank=True, null=True)
+    timestamp_from = models.DurationField()
+    timestamp_to = models.DurationField()
+    duration = models.DurationField(blank=True)

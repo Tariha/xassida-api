@@ -1,7 +1,6 @@
 from rest_framework import routers
 from .views import *
 
-from django.urls import path, include
 from rest_framework_nested import routers
 from .views import (
     XassidaViewSet,
@@ -14,18 +13,18 @@ from .views import (
 router = routers.SimpleRouter()
 
 # Register Xassida routes
-router.register(r'xassidas', XassidaViewSet, basename='xassida')
+router.register(r"xassidas", XassidaViewSet, basename="xassida")
 
 # Register Reciter routes
-router.register(r'reciters', ReciterViewSet, basename='reciter')
+router.register(r"reciters", ReciterViewSet, basename="reciter")
 
 # Register Author routes
-router.register(r'authors', AuthorViewSet, basename='author')
+router.register(r"authors", AuthorViewSet, basename="author")
 
 # Register AuthorInfo routes
-router.register(r'infos', AuthorInfoViewSet, basename='info')
+router.register(r"infos", AuthorInfoViewSet, basename="info")
 
 # Register Chapter routes
-router.register(r'chapters', ChapterViewSet, basename='chapters')
+router.register(r"chapters", ChapterViewSet, basename="chapters")
 
-urlpatterns = router.urls 
+urlpatterns = router.urls

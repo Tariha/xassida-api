@@ -5,137 +5,312 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
+        ("contenttypes", "0002_remove_content_type_name"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Audio',
+            name="Audio",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.FileField(upload_to='')),
-                ('duration', models.DurationField(blank=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("file", models.FileField(upload_to="")),
+                ("duration", models.DurationField(blank=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('picture', models.ImageField(blank=True, null=True, upload_to='')),
-                ('tariha', models.CharField(choices=[('tidjian', 'Tidjian'), ('mouride', 'Mouride'), ('niassene', 'Niassene'), ('layene', 'Layene'), ('khadre', 'Khadre')], max_length=15)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("picture", models.ImageField(blank=True, null=True, upload_to="")),
+                (
+                    "tariha",
+                    models.CharField(
+                        choices=[
+                            ("tidjian", "Tidjian"),
+                            ("mouride", "Mouride"),
+                            ("niassene", "Niassene"),
+                            ("layene", "Layene"),
+                            ("khadre", "Khadre"),
+                        ],
+                        max_length=15,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Chapter',
+            name="Chapter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('number', models.IntegerField()),
-                ('start_page', models.IntegerField()),
-                ('end_page', models.IntegerField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("number", models.IntegerField()),
+                ("start_page", models.IntegerField()),
+                ("end_page", models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Reciter',
+            name="Reciter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('picture', models.ImageField(blank=True, null=True, upload_to='')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("picture", models.ImageField(blank=True, null=True, upload_to="")),
             ],
         ),
         migrations.CreateModel(
-            name='Verse',
+            name="Verse",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('number', models.IntegerField()),
-                ('key', models.CharField(max_length=10)),
-                ('text', models.TextField()),
-                ('chapter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='verses', to='api.chapter')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("number", models.IntegerField()),
+                ("key", models.CharField(max_length=10)),
+                ("text", models.TextField()),
+                (
+                    "chapter",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="verses",
+                        to="api.chapter",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Xassida',
+            name="Xassida",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='xassidas', to='api.author')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="xassidas",
+                        to="api.author",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Word',
+            name="Word",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.IntegerField(blank=True, null=True)),
-                ('text', models.CharField(max_length=50)),
-                ('transcription', models.CharField(max_length=100)),
-                ('verse', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='words', to='api.verse')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.IntegerField(blank=True, null=True)),
+                ("text", models.CharField(max_length=50)),
+                ("transcription", models.CharField(max_length=100)),
+                (
+                    "verse",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="words",
+                        to="api.verse",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='VerseTranslation',
+            name="VerseTranslation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('lang', models.CharField(max_length=2)),
-                ('text', models.TextField()),
-                ('author', models.CharField(max_length=100)),
-                ('verse', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='translations', to='api.verse')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("lang", models.CharField(max_length=2)),
+                ("text", models.TextField()),
+                ("author", models.CharField(max_length=100)),
+                (
+                    "verse",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="translations",
+                        to="api.verse",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='VerseTiming',
+            name="VerseTiming",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('timestamp_from', models.DurationField()),
-                ('timestamp_to', models.DurationField()),
-                ('duration', models.DurationField(blank=True)),
-                ('audio', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='verse_timings', to='api.audio')),
-                ('verse', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='timing', to='api.verse')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("timestamp_from", models.DurationField()),
+                ("timestamp_to", models.DurationField()),
+                ("duration", models.DurationField(blank=True)),
+                (
+                    "audio",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="verse_timings",
+                        to="api.audio",
+                    ),
+                ),
+                (
+                    "verse",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="timing",
+                        to="api.verse",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TranslatedName',
+            name="TranslatedName",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('lang', models.CharField(max_length=2)),
-                ('transcription', models.CharField(blank=True, max_length=100, null=True)),
-                ('translation', models.CharField(blank=True, max_length=100, null=True)),
-                ('object_id', models.PositiveIntegerField()),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("lang", models.CharField(max_length=2)),
+                (
+                    "transcription",
+                    models.CharField(blank=True, max_length=100, null=True),
+                ),
+                (
+                    "translation",
+                    models.CharField(blank=True, max_length=100, null=True),
+                ),
+                ("object_id", models.PositiveIntegerField()),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="contenttypes.contenttype",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='chapter',
-            name='xassida',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='chapters', to='api.xassida'),
+            model_name="chapter",
+            name="xassida",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="chapters",
+                to="api.xassida",
+            ),
         ),
         migrations.CreateModel(
-            name='AuthorInfo',
+            name="AuthorInfo",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('lang', models.CharField(max_length=2)),
-                ('text', models.TextField()),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='infos', to='api.author')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("lang", models.CharField(max_length=2)),
+                ("text", models.TextField()),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="infos",
+                        to="api.author",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='audio',
-            name='reciter',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='audios', to='api.reciter'),
+            model_name="audio",
+            name="reciter",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="audios",
+                to="api.reciter",
+            ),
         ),
         migrations.AddField(
-            model_name='audio',
-            name='xassida',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='audios', to='api.xassida'),
+            model_name="audio",
+            name="xassida",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="audios",
+                to="api.xassida",
+            ),
         ),
         migrations.AddIndex(
-            model_name='translatedname',
-            index=models.Index(fields=['content_type', 'object_id'], name='api_transla_content_497f42_idx'),
+            model_name="translatedname",
+            index=models.Index(
+                fields=["content_type", "object_id"],
+                name="api_transla_content_497f42_idx",
+            ),
         ),
     ]

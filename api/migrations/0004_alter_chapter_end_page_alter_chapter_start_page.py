@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('api', '0003_remove_versetiming_verse_versetiming_verse_number'),
+        ("api", "0003_remove_versetiming_verse_versetiming_verse_number"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='chapter',
-            name='end_page',
+            model_name="chapter",
+            name="end_page",
             field=models.IntegerField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='chapter',
-            name='start_page',
+            model_name="chapter",
+            name="start_page",
             field=models.IntegerField(blank=True, null=True),
         ),
     ]

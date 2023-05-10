@@ -4,18 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('api', '0004_alter_chapter_end_page_alter_chapter_start_page'),
+        ("api", "0004_alter_chapter_end_page_alter_chapter_start_page"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='chapter',
-            name='end_page',
+            model_name="chapter",
+            name="end_page",
         ),
         migrations.RemoveField(
-            model_name='chapter',
-            name='start_page',
+            model_name="chapter",
+            name="start_page",
         ),
     ]
