@@ -18,6 +18,11 @@ jobs:
         id: file_changes
         uses: trilom/file-changes-action@v1.2.4
 
+      - name: Parsing the output
+        run: |
+          paths=$(echo '${{ steps.file_changes.outputs.files }}' | jq -r '.[]')
+          echo 'XASSIDAS=$paths' >> $GITHUB_ENV
+
       - name: Run insertion playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
@@ -30,7 +35,7 @@ jobs:
             server1 ansible_host=134.209.180.132 ansible_user=root
 
           options: |
-            --extra-vars xassidas=${{ steps.file_changes.outputs.files | fromJson | .[]  }}
+            --extra-vars xassidas=${{ env.XASSIDAS }}
             --user root
             --ssh-extra-args "-o StrictHostKeyChecking=no"
             --verbose
