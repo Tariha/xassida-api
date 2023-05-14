@@ -4,6 +4,13 @@ on:
   push:
     branches: main
 
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Manually trigger the workflow'
+        required: true
+        default: 'true'
+
 jobs:
   test:
     runs-on: ubuntu-latest
