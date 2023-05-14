@@ -8,13 +8,9 @@
 
   tasks:
      - name: Pull the project from Github
-       git:
-        repo: https://github.com/Tariha/tariha-api.git
-        dest: "{{ project_dir }}"
-        update: yes
-        force: no
-        clone: yes
-        depth: 1
+       command: git pull
+       args:
+         chdir: "{{ project_dir }}"
        tags:
         - code
 
