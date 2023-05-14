@@ -17,13 +17,13 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
-          playbook: update_db.yml
-          directory: .ansible/playbooks/
+          playbook: update_playbook.yml
+          directory: ./
           key: ${{secrets.SSH_PRIVATE_KEY}}
           inventory: |
             [apiservers]
             server1 ansible_host=134.209.180.132 ansible_user=root
 
           options: |
-            --extra-vars xassidas=${{ join(steps.file_changes.outputs.files, " ") }}
+            --extra-vars xassidas=${{ join(steps.file_changes.outputs.files, ' ') }}
             --verbose
