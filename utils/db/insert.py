@@ -29,11 +29,14 @@ if __name__ == "__main__":
     glob_path = f"{args.tariha}/" if args.tariha else "*/"
     glob_path += f"{args.author}/" if args.author else "*/"
     glob_path += f"{args.xassida}/*.json" if args.xassida else "*.json"
-    # getting the insert function
-    insert_function = helpers.create_xassidas if args.xassida else helpers.create_author
+
     # start parsing files
     for file in Path("../../data/xassidas").glob(glob_path):
-        author = file.parent.parent.stem if args.xassida else file.parent.stem
-        print("Inserting to db %s xassidas" % (author))
         data = json.loads(file.read_text())
-        handle_recursive_insert(data, insert_function, author)
+        if args.xassida:
+            author_file = file.parent.parent / "xassidas.json"
+            author_data = json.loads(author_file.read_text())
+            author_data["xassidas"] = [data]
+            data = author_data
+        print("Inserting to db %s xassidas" % (data['name']))
+        handle_recursive_insert(data, helpers.create_author)

@@ -7,6 +7,7 @@ import django
 from django.core.files import File
 
 sys.path.append("../../")
+sys.path.append("./")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
 django.setup()
 
@@ -39,7 +40,6 @@ def create_infos(data, author):
 
 def create_xassidas(data, author):
     """Xassida insertion"""
-    author = Author.objects.get(name=author) if (type(author) is str) else author
     del data["translated_lang"]
     obj, _ = Xassida.objects.update_or_create(
         name=data["name"], author=author, defaults=data

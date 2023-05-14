@@ -1,0 +1,29 @@
+---
+
+- name: Update the database
+
+  vars:
+    project_name: xassida
+    project_dir: /home/{{ ansible_user }}/{{ project_name }}
+
+  tasks:
+     - name: Pull the project from Github
+       git:
+        repo: https://github.com/Tariha/tariha-api.git
+        dest: "{{ project_dir }}"
+        update: yes
+        force: no
+        clone: yes
+        depth: 1
+       tags:
+        - code
+
+     - name: Make script.sh executable
+       file:
+         path: "{{ project_dir }}/update_db.sh"
+          mode: u+x
+
+     - name: Parse and Insert the xassida to database
+       command: ./update_db.sh {{ xassidas }}
+       args:
+         chdir: "{{ project_dir }}"

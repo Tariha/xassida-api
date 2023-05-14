@@ -1,9 +1,10 @@
 db.sqlite3
+assets
+static
 **/__pycache__
 quran-simple.txt
 env/
 .DS_Store
 .ipynb_checkpoints
-static
-.ansible
-assets
+.ansible/playbooks/deployment
+.ansible/playbooks/.vagrant
