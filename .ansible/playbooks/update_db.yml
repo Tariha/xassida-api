@@ -1,6 +1,7 @@
 ---
 
 - name: Update the database
+  hosts: apiservers
 
   vars:
     project_name: xassida
@@ -17,7 +18,7 @@
      - name: Make script.sh executable
        file:
          path: "{{ project_dir }}/update_db.sh"
-          mode: u+x
+         mode: u+x
 
      - name: Parse and Insert the xassida to database
        command: ./update_db.sh {{ xassidas }}

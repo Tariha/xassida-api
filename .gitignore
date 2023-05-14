@@ -6,4 +6,5 @@ quran-simple.txt
 env/
 .DS_Store
 .ipynb_checkpoints
-.ansible/
+.ansible/playbooks/deployment
+.ansible/playbooks/.vagrant

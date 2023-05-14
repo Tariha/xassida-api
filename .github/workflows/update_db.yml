@@ -5,17 +5,15 @@ on:
     branches: main
 
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: 'Manually trigger the workflow'
-        required: true
-        default: 'true'
 
 jobs:
-  test:
+  update:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Get newly created or updated xassida 
         id: file_changes
         uses: trilom/file-changes-action@v1.2.4
@@ -24,13 +22,15 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
-          playbook: update_playbook.yml
-          directory: ./
-          key: ${{secrets.ANSIBLE_SSH_PRIVATE_KEY}}
+          playbook: update_db.yml
+          directory: .ansible/playbooks/
+          key: ${{ secrets.SECRET_SSH_KEY }}
           inventory: |
             [apiservers]
             server1 ansible_host=134.209.180.132 ansible_user=root
 
           options: |
             --extra-vars xassidas=${{ join(steps.file_changes.outputs.files, ' ') }}
+            --user root
+            --ssh-extra-args "-o StrictHostKeyChecking=no"
             --verbose
