@@ -12,6 +12,6 @@ Pillow==9.3.0
 psycopg2==2.9.6
 pytz==2022.6
 sqlparse==0.4.3
-transcription @ git+https://git@github.com/Tariha/transcription.git@dfe1f2aa1d2a9f1907386e1b6393e0bfbe4a52b1
+git+https://git@github.com/Tariha/transcription.git#egg=transcription
 typing_extensions==4.5.0
 zipp==3.10.0
