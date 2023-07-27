@@ -1,0 +1,4 @@
+env
+assets
+static
+db.sqlite3
