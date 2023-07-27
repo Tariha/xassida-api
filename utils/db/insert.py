@@ -38,5 +38,5 @@ if __name__ == "__main__":
             author_data = json.loads(author_file.read_text())
             author_data["xassidas"] = [data]
             data = author_data
-        print("Inserting to db %s xassidas" % (data['name']))
+        print("Inserting to db %s xassidas" % (data["name"]))
         handle_recursive_insert(data, helpers.create_author)

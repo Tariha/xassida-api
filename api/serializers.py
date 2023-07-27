@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import *
+
+from .models import (Audio, Author, AuthorInfo, Chapter, Reciter,
+                     TranslatedName, Verse, VerseTranslation, Word, Xassida)
 
 
 class TranslatedNameSerializer(serializers.ModelSerializer):
@@ -42,7 +44,7 @@ class AuthorWithInfoSerializer(serializers.ModelSerializer):
     def get_info(self, obj):
         try:
             author_info = obj.infos.get(lang="fr")
-        except:
+        except Exception:
             author_info = None
         return AuthorInfoSerializer(author_info, many=False).data
 

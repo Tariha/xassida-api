@@ -60,7 +60,8 @@ class Author(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        name = self.name.replace("-", " ").replace("_", " ")
+        return name
 
 
 class AuthorInfo(models.Model):
@@ -86,7 +87,8 @@ class Xassida(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        name = self.name.replace("-", " ").replace("_", " ")
+        return name
 
     class Meta:
         ordering = ["-modified"]
@@ -117,6 +119,9 @@ class Verse(models.Model):
 
     def __str__(self):
         return self.key
+
+    def get_transcription(self):
+        return " ".join([word.transcription for word in self.words.all()])
 
     class Meta:
         ordering = ["number"]

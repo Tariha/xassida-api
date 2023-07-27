@@ -1,13 +1,13 @@
+from django.urls import path
 from rest_framework import routers
-from .views import *
 
-from rest_framework_nested import routers
 from .views import (
     XassidaViewSet,
     ReciterViewSet,
     AuthorViewSet,
     AuthorInfoViewSet,
     ChapterViewSet,
+    PDFView,
 )
 
 router = routers.SimpleRouter()
@@ -27,4 +27,7 @@ router.register(r"infos", AuthorInfoViewSet, basename="info")
 # Register Chapter routes
 router.register(r"chapters", ChapterViewSet, basename="chapters")
 
-urlpatterns = router.urls
+urlpatterns = [
+    *router.urls,
+    path(r"pdf/<pk>", PDFView.as_view(), name="pdf"),
+]

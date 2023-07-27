@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{{ xassida }}</title>
+  </head>
+  <body>
+    <header>
+        <img class="logo" src="{% static 'logo.png' %}"/>
+        <h3>XASSIDA.SN</h3>
+    </header>
+    <main>
+      <div class="title">
+        <h2 class="uppercase">{{ xassida }}</h2>
+        <p class="uppercase">{{ xassida.author }}</p>
+      </div>
+      <div class="container">
+        {% for chapter in xassida.chapters.all %}
+          <div class="chapter-container">
+            <h3 class="chapter">Chapitre {{ chapter.number }}</h3>
+          </div>
+          {% for verse in chapter.verses.all %}
+            <div class="verse">
+              <span class="key">{{ verse.key }}</span>
+              <div class="arab-container">
+                <div class="arab">
+                  {{ verse.text }}
+                </div>
+              </div>
+              <p class="transcription">
+                {{verse.get_transcription}}
+              </p>
+              <p class="font-sans traduction">
+                {{verse.translations.first.text}}
+              </p>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </main>
+
+    <footer>
+      &copy; 2023 <a href="https://xassida.sn">xassida.sn</a>
+    </footer>
+</body>
+</html>
+

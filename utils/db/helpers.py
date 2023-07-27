@@ -1,20 +1,20 @@
 import os
 import sys
-from dataclasses import asdict
 from pathlib import Path
 
 import django
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
+
+from api.models import (Audio, Author, AuthorInfo, Chapter, Reciter,
+                        TranslatedName, Verse, VerseTiming, VerseTranslation,
+                        Word, Xassida)
 
 sys.path.append("../../")
 sys.path.append("./")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
 django.setup()
-
-from django.contrib.contenttypes.models import ContentType
-from django.conf import settings
-
-from api.models import *
 
 
 def create_author(data, *args):
@@ -25,7 +25,9 @@ def create_author(data, *args):
         img_path = Path(f"../../data/xassidas/{data['tariha']}/{data['name']}")
         img_file = next(img_path.glob("profile.*"), None)
         data["picture"] = File(img_file.open("rb"), data["name"]) if img_file else None
-    return Author.objects.update_or_create(name=data["name"], tariha=data["tariha"], defaults=data)[0]
+    return Author.objects.update_or_create(
+        name=data["name"], tariha=data["tariha"], defaults=data
+    )[0]
 
 
 def create_infos(data, author):
@@ -105,7 +107,7 @@ def create_audios(data, xassida):
     return obj
 
 
-def create_verse_timings(audio, *args):
+def create_verse_timings(data, audio):
     """AudioTiming insertion"""
     obj, _ = VerseTiming.objects.update_or_create(
         audio=audio, verse_number=data["verse_number"], defaults=data
