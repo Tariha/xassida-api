@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'uthmani';
+  src: local('uthmani'), url('/static/fonts/amiri.ttf');
+}
+
+@page {
+  margin: 5mm; /* Set all margins to 10mm */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #2ca4ab;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+main {
+  padding: 1rem;
+}
+
+footer {
+  background-color: #2ca4ab;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: 98%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.chapter-container {
+  display: flex;
+  justify-content: center;
+}
+
+.chapter {
+  color: white;
+  width: 100%;
+  margin-top: 30px;
+  background-color: #2ca4ab;
+  padding: 4px 4px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 8px;
+}
+
+.verse:nth-child(odd) {
+  background-color: #f3f3f3;
+}
+
+.verse {
+  flex: 1;
+  padding: 1rem;
+  font-family: "uthmani", sans-serif;
+  word-spacing: 2px;
+  font-feature-settings: "liga", "calt";
+}
+
+.arab-container {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.arab {
+  font-size: 33px;
+  text-align: right;
+  line-height: 2;
+  word-spacing: 2px;
+  font-feature-settings: "liga", "calt";
+}
+
+.key {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.transcription {
+  margin-top: 2px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.traduction {
+  font-size: 12px;
+  margin-top: 10px;
+  font-family: monospace;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-slate-800 {
+  color: #4a5568;
+}
+
+.font-mono {
+  font-family: monospace;
+}
+
+.text-arab {
+  font-size: 32px;
+}
+
+.text-gray-300 {
+  color: #d1d5db;
+}
+
+.font-sans {
+  font-family: sans-serif;
+}

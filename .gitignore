@@ -1,6 +1,5 @@
 db.sqlite3
 assets
-static
 **/__pycache__
 quran-simple.txt
 env/
