@@ -3,6 +3,11 @@ import sys
 from pathlib import Path
 
 import django
+sys.path.append("../../")
+sys.path.append("./")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
+django.setup()
+
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
@@ -10,12 +15,6 @@ from django.core.files import File
 from api.models import (Audio, Author, AuthorInfo, Chapter, Reciter,
                         TranslatedName, Verse, VerseTiming, VerseTranslation,
                         Word, Xassida)
-
-sys.path.append("../../")
-sys.path.append("./")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xassida.settings")
-django.setup()
-
 
 def create_author(data, *args):
     """Author insertion"""
