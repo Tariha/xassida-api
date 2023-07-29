@@ -1,9 +1,9 @@
-FROM python:3.9-alpine
-
+FROM python:3
 ENV PYTHONUNBUFFERED 1
-
 WORKDIR /django
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
+EXPOSE 8000
+RUN python manage.py migrate
+CMD [ "python", "manage.py","runserver"]
