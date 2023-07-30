@@ -60,7 +60,8 @@ Faudra d'abord cloner le projet:
 ## Comment contribuer ?
   Vous pouvez aider en ouvrant ou résolvant les **issues** ouverts [ici](https://github.com/Tariha/xassida-api/issues)
   
-## Documentation de l'api bientôt
+## Documentation
+   Visiter https://xassidapi.ddns.net/ ou http://localhost:8000/
 
 ## License
 This project is licensed under the MIT License.

@@ -6,8 +6,9 @@ from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from .models import Audio, Author, AuthorInfo, Chapter, Reciter, Xassida
+from .models import Audio, Author, AuthorInfo, Chapter, Reciter, Xassida, Verse
 from .serializers import (AudioSerializer, AuthorInfoSerializer,
                           AuthorSerializer, AuthorWithInfoSerializer,
                           ChapterSerializer, ReciterSerializer,
@@ -18,21 +19,25 @@ class CustomPagination(PageNumberPagination):
     page_size = 15
 
 
+class VersePagination(PageNumberPagination):
+    page_size = 20
+
+
 # Create your views here.
 class ReciterViewSet(ReadOnlyModelViewSet):
-    "Reciter Model ViewSet"
+    "Avoir un ou plusieur recitateurs"
     queryset = Reciter.objects.all()
     serializer_class = ReciterSerializer
 
 
 class AuthorInfoViewSet(ReadOnlyModelViewSet):
-    "AuthorInfo Model ViewSet"
+    "Avoir les informations d'un auteur"
     queryset = AuthorInfo.objects.all()
     serializer_class = AuthorInfoSerializer
 
 
 class AuthorViewSet(ReadOnlyModelViewSet):
-    "Author Model ViewSet"
+    "Avoir un ou plusieur auteurs"
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     filterset_fields = ["tariha"]
@@ -47,7 +52,7 @@ class AuthorViewSet(ReadOnlyModelViewSet):
 
 
 class XassidaViewSet(ReadOnlyModelViewSet):
-    "Author Model ViewSet"
+    "Avoir un ou plusieur xassidas"
     queryset = Xassida.objects.all()
     serializer_class = XassidaSerializer
     filter_backends = [
@@ -59,23 +64,22 @@ class XassidaViewSet(ReadOnlyModelViewSet):
     pagination_class = CustomPagination
 
 
-class ChapterViewSet(ReadOnlyModelViewSet):
-    "Verse Model ViewSet"
-    queryset = Chapter.objects.all()
+class ChapterRetrieveView(RetrieveAPIView):
+    "Avoir une chapitre "
+    queryset = Chapter
     serializer_class = ChapterSerializer
 
-    @action(detail=True, methods=["get"], url_path="verses")
-    def getVerses(self, request, *args, **kwargs):
-        verses = self.get_object().verses.all()
-        paginator = PageNumberPagination()
-        paginator.page_size = 20
-        page = paginator.paginate_queryset(verses, request)
-        if page is not None:
-            serializer = VerseSerializer(page, many=True)
-            return paginator.get_paginated_response(serializer.data)
 
-        serializer = VerseSerializer(verses, many=True)
-        return Response(serializer.data)
+class VerseListView(ListAPIView):
+    "Avoir les versets d'une chapitre"
+    queryset = Verse
+    serializer_class = VerseSerializer
+    pagination_class = VersePagination
+
+    def get_queryset(self):
+        chapter_id = self.kwargs.get("pk")
+        queryset = Verse.objects.filter(chapter_id=chapter_id)
+        return queryset
 
 
 class AudioViewSet(ReadOnlyModelViewSet):
