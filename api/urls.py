@@ -6,7 +6,8 @@ from .views import (
     ReciterViewSet,
     AuthorViewSet,
     AuthorInfoViewSet,
-    ChapterViewSet,
+    ChapterRetrieveView,
+    VerseListView,
     PDFView,
 )
 
@@ -24,10 +25,9 @@ router.register(r"authors", AuthorViewSet, basename="author")
 # Register AuthorInfo routes
 router.register(r"infos", AuthorInfoViewSet, basename="info")
 
-# Register Chapter routes
-router.register(r"chapters", ChapterViewSet, basename="chapters")
-
 urlpatterns = [
     *router.urls,
+    path(r"chapters/<int:pk>/", ChapterRetrieveView.as_view(), name="list-chapters"),
+    path(r"chapters/<int:pk>/verses/", VerseListView.as_view(), name="list-verses"),
     path(r"pdf/<pk>", PDFView.as_view(), name="pdf"),
 ]

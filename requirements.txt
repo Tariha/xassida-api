@@ -1,3 +1,4 @@
+arab-transcription==1.0.0
 arabic-reshaper==3.0.0
 asgiref==3.5.2
 asn1crypto==1.5.1
@@ -53,12 +54,14 @@ six==1.16.0
 sqlparse==0.4.3
 svglib==1.5.1
 tinycss2==1.2.1
-transcription @ git+https://git@github.com/Tariha/transcription.git@dfe1f2aa1d2a9f1907386e1b6393e0bfbe4a52b1
+transcription==0.1
 typing_extensions==4.5.0
 tzlocal==5.0.1
+uritemplate==4.1.1
 uritools==4.0.1
 urllib3==2.0.4
 weasyprint==58.0
 webencodings==0.5.1
+xhtml2pdf==0.2.11
 zipp==3.10.0
 zopfli==0.2.2
