@@ -13,8 +13,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_random_secret_key()
 
 DEBUG = False
+APPEND_SLASH = True
 
 SECURE_HSTS_SECONDS = 2_592_000  # 30 days
 SECURE_HSTS_PRELOAD = True

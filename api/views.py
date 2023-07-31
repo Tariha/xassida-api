@@ -59,7 +59,7 @@ class XassidaViewSet(ReadOnlyModelViewSet):
         filters.SearchFilter,
         django_filters.rest_framework.DjangoFilterBackend,
     ]
-    search_fields = ["name", "chapters__verses__words__transcription"]
+    search_fields = ["name"]
     filterset_fields = ["author", "author__tariha"]
     pagination_class = CustomPagination
 

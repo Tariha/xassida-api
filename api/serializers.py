@@ -71,14 +71,26 @@ class VerseTranslationSerializer(serializers.ModelSerializer):
 
 
 class VerseSerializer(serializers.ModelSerializer):
-    translations = VerseTranslationSerializer(many=True, read_only=True)
-    words = WordSerializer(many=True, read_only=True)
+    translations = serializers.SerializerMethodField()
 
     class Meta:
         model = Verse
-        fields = ["id", "number", "key", "text", "translations", "words"]
+        fields = ["id", "number", "key", "text", "translations", "transcription"]
         read_only_fields = ["id"]
 
+    def get_translation_by_lang(self, verse, lang):
+        try:
+            return verse.translations.get(lang=lang)
+        except VerseTranslation.DoesNotExist:
+            return None
+
+    def get_translations(self, verse):
+        lang = self.context.get('request').query_params.get('lang')
+        translation = self.get_translation_by_lang(verse, lang)
+        if translation:
+            return VerseTranslationSerializer(translation).data
+        return None
+        
 
 class ChapterSerializer(serializers.ModelSerializer):
     # verses = VerseSerializer(many=True, read_only=True)

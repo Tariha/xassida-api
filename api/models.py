@@ -116,12 +116,10 @@ class Verse(models.Model):
     number = models.IntegerField()
     key = models.CharField(max_length=10)
     text = models.TextField()
+    transcription = models.TextField()
 
     def __str__(self):
         return self.key
-
-    def get_transcription(self):
-        return " ".join([word.transcription for word in self.words.all()])
 
     class Meta:
         ordering = ["number"]
