@@ -72,10 +72,11 @@ class VerseTranslationSerializer(serializers.ModelSerializer):
 
 class VerseSerializer(serializers.ModelSerializer):
     translations = serializers.SerializerMethodField()
+    words = WordSerializer(many=True)
 
     class Meta:
         model = Verse
-        fields = ["id", "number", "key", "text", "translations", "transcription"]
+        fields = ["id", "number", "key", "text", "translations", "transcription", "words"]
         read_only_fields = ["id"]
 
     def get_translation_by_lang(self, verse, lang):
