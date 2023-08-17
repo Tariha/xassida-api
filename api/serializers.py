@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+
 from .models import (Audio, Author, AuthorInfo, Chapter, Reciter,
                      TranslatedName, Verse, VerseTranslation, Word, Xassida)
 

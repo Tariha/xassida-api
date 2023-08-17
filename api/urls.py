@@ -4,6 +4,7 @@ from rest_framework import routers
 from .views import (
     XassidaViewSet,
     ReciterViewSet,
+    AudioViewSet,
     AuthorViewSet,
     AuthorInfoViewSet,
     ChapterRetrieveView,
@@ -24,6 +25,9 @@ router.register(r"authors", AuthorViewSet, basename="author")
 
 # Register AuthorInfo routes
 router.register(r"infos", AuthorInfoViewSet, basename="info")
+
+# Register Audio routes
+router.register(r"audios", AudioViewSet, basename="audio")
 
 urlpatterns = [
     *router.urls,

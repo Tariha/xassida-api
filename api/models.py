@@ -38,6 +38,7 @@ class Reciter(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
     picture = models.ImageField(blank=True, null=True)
+    tariha = models.CharField(max_length=15, choices=EnumTariha.choices)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -91,7 +92,7 @@ class Xassida(models.Model):
         return name
 
     class Meta:
-        ordering = ["-modified"]
+        ordering = ["slug"]
 
 
 class Chapter(models.Model):
@@ -152,9 +153,9 @@ class Word(models.Model):
 class Audio(models.Model):
     """Audio Model"""
 
-    xassida = models.ForeignKey(Xassida, models.CASCADE, related_name="audios")
+    xassida = models.ForeignKey(Xassida, models.DO_NOTHING, related_name="audios")
     reciter = models.ForeignKey(Reciter, models.CASCADE, related_name="audios")
-    file = models.FileField()
+    file = models.URLField()
     duration = models.DurationField(blank=True)
 
 

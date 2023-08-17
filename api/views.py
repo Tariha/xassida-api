@@ -4,8 +4,9 @@ from django_weasyprint import WeasyTemplateResponseMixin
 from rest_framework import filters
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from .permissions import IsAdminOrReadOnly
 from rest_framework.response import Response
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Audio, Author, AuthorInfo, Chapter, Reciter, Xassida, Verse
@@ -24,10 +25,11 @@ class VersePagination(PageNumberPagination):
 
 
 # Create your views here.
-class ReciterViewSet(ReadOnlyModelViewSet):
+class ReciterViewSet(ModelViewSet):
     "Avoir un ou plusieur recitateurs"
     queryset = Reciter.objects.all()
     serializer_class = ReciterSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class AuthorInfoViewSet(ReadOnlyModelViewSet):
@@ -44,6 +46,7 @@ class AuthorViewSet(ReadOnlyModelViewSet):
 
     @action(detail=True, methods=["get"], url_path="info")
     def withInfo(self, request, *args, **kwargs):
+        print(request.user)
         obj = self.get_object()
         serializer = AuthorWithInfoSerializer(
             obj, context={"request": request}, many=False
@@ -82,10 +85,11 @@ class VerseListView(ListAPIView):
         return queryset
 
 
-class AudioViewSet(ReadOnlyModelViewSet):
+class AudioViewSet(ModelViewSet):
     "Audio Model ViewSet"
     queryset = Audio.objects.all()
     serializer_class = AudioSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
 # --------------------------------------------------------------
