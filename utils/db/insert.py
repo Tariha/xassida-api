@@ -6,6 +6,10 @@ import helpers
 
 
 def handle_recursive_insert(datas, fn, arg=None):
+    if fn.__name__ == "create_chapters":
+        # chapters are saved in a dict
+        datas = list(datas.values())
+
     if not type(datas) is list:
         datas = [datas]
 

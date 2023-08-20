@@ -136,7 +136,8 @@ class VerseTimingSerializer(serializers.ModelSerializer):
 
 
 class AudioSerializer(serializers.ModelSerializer):
-    verse_timings = VerseTimingSerializer(many=True)
+    reciter_info = ReciterSerializer(source='reciter', read_only=True)
+    xassida_info = XassidaSerializer(source='xassida', read_only=True)
 
     class Meta:
         model = Audio

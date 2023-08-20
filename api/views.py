@@ -19,6 +19,11 @@ from .serializers import (AudioSerializer, AuthorInfoSerializer,
 class CustomPagination(PageNumberPagination):
     page_size = 15
 
+    def paginate_queryset(self, queryset, request, view=None):
+        if 'page' not in request.query_params:
+            return None
+        return super().paginate_queryset(queryset, request, view)
+
 
 class VersePagination(PageNumberPagination):
     page_size = 20
@@ -29,7 +34,14 @@ class ReciterViewSet(ModelViewSet):
     "Avoir un ou plusieur recitateurs"
     queryset = Reciter.objects.all()
     serializer_class = ReciterSerializer
+    filterset_fields = ["tariha"]
+    search_fields = ["name"]
     permission_classes = [IsAdminOrReadOnly]
+    pagination_class = CustomPagination
+    filter_backends = [
+        filters.SearchFilter,
+        django_filters.rest_framework.DjangoFilterBackend,
+    ]
 
 
 class AuthorInfoViewSet(ReadOnlyModelViewSet):
@@ -43,6 +55,7 @@ class AuthorViewSet(ReadOnlyModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     filterset_fields = ["tariha"]
+    pagination_class = CustomPagination
 
     @action(detail=True, methods=["get"], url_path="info")
     def withInfo(self, request, *args, **kwargs):
@@ -58,24 +71,24 @@ class XassidaViewSet(ReadOnlyModelViewSet):
     "Avoir un ou plusieur xassidas"
     queryset = Xassida.objects.all()
     serializer_class = XassidaSerializer
+    search_fields = ["name"]
+    filterset_fields = ["author", "author__tariha"]
+    pagination_class = CustomPagination
     filter_backends = [
         filters.SearchFilter,
         django_filters.rest_framework.DjangoFilterBackend,
     ]
-    search_fields = ["name"]
-    filterset_fields = ["author", "author__tariha"]
-    pagination_class = CustomPagination
 
 
 class ChapterRetrieveView(RetrieveAPIView):
     "Avoir une chapitre "
-    queryset = Chapter
+    queryset = Chapter.objects.all()
     serializer_class = ChapterSerializer
 
 
 class VerseListView(ListAPIView):
     "Avoir les versets d'une chapitre"
-    queryset = Verse
+    queryset = Verse.objects.all()
     serializer_class = VerseSerializer
     pagination_class = VersePagination
 
@@ -89,6 +102,8 @@ class AudioViewSet(ModelViewSet):
     "Audio Model ViewSet"
     queryset = Audio.objects.all()
     serializer_class = AudioSerializer
+    filterset_fields = ["reciter__tariha"]
+    pagination_class = CustomPagination
     permission_classes = [IsAdminOrReadOnly]
 
 

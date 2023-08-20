@@ -64,6 +64,9 @@ class Author(models.Model):
         name = self.name.replace("-", " ").replace("_", " ")
         return name
 
+    class Meta:
+        ordering = ["slug"]
+
 
 class AuthorInfo(models.Model):
     """AuthorInfo Model"""
@@ -155,8 +158,11 @@ class Audio(models.Model):
 
     xassida = models.ForeignKey(Xassida, models.DO_NOTHING, related_name="audios")
     reciter = models.ForeignKey(Reciter, models.CASCADE, related_name="audios")
-    file = models.URLField()
-    duration = models.DurationField(blank=True)
+    file = models.FileField(upload_to=upload_path)
+    duration = models.DurationField(blank=True, null=True)
+
+    class Meta:
+        ordering = ["reciter__name"]
 
 
 class VerseTiming(models.Model):

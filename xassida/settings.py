@@ -170,6 +170,7 @@ SIMPLE_JWT = {
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False,
+    "JWT_TOKEN_CLAIMS_SERIALIZER": "authentication.serializers.TokenSerializer",
     "USER_DETAILS_SERIALIZER": "authentication.serializers.UserSerializer"
 }
 
