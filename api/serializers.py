@@ -1,6 +1,4 @@
 from rest_framework import serializers
-
-
 from .models import (Audio, Author, AuthorInfo, Chapter, Reciter,
                      TranslatedName, Verse, VerseTranslation, Word, Xassida)
 
@@ -17,21 +15,19 @@ class ReciterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reciter
         exclude = []
-        read_only_fields = ["id"]
 
 
 class AuthorInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthorInfo
         exclude = []
-        read_only_fields = ["id"]
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         exclude = []
-        read_only_fields = ["id", "slug"]
+        read_only_fields = ["slug"]
 
 
 class AuthorWithInfoSerializer(serializers.ModelSerializer):
@@ -40,7 +36,7 @@ class AuthorWithInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         exclude = []
-        read_only_fields = ["id", "slug"]
+        read_only_fields = ["slug"]
 
     def get_info(self, obj):
         try:
@@ -61,14 +57,12 @@ class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
         exclude = ["id", "verse"]
-        read_only_fields = ["id"]
 
 
 class VerseTranslationSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerseTranslation
         exclude = ["id", "verse"]
-        read_only_fields = ["id"]
 
 
 class VerseSerializer(serializers.ModelSerializer):
@@ -78,7 +72,6 @@ class VerseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Verse
         fields = ["id", "number", "key", "text", "translations", "transcription", "words"]
-        read_only_fields = ["id"]
 
     def get_translation_by_lang(self, verse, lang):
         try:
@@ -102,7 +95,6 @@ class ChapterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chapter
         fields = ["id", "name", "number", "translated_names", "verse_count"]
-        read_only_fields = ["id"]
 
     def get_verse_count(self, obj):
         return len(obj.verses.all())
@@ -110,6 +102,7 @@ class ChapterSerializer(serializers.ModelSerializer):
 
 class XassidaSerializer(serializers.ModelSerializer):
     translated_names = TranslatedNameSerializer(many=True, read_only=True)
+    reciters = serializers.SerializerMethodField()
     author = AuthorSerializer()
 
     class Meta:
@@ -119,12 +112,15 @@ class XassidaSerializer(serializers.ModelSerializer):
             "author",
             "name",
             "slug",
-            "created",
-            "modified",
             "translated_names",
             "chapters",
+            "reciters"
         ]
-        read_only_fields = ["id", "slug"]
+        read_only_fields = ["slug", "reciters"]
+
+    def get_reciters(self, obj):
+        audio_reciters = obj.audios.values_list('reciter', flat=True)
+        return list(audio_reciters)
 
 
 # Audio Serializers
@@ -132,7 +128,6 @@ class VerseTimingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
         exclude = []
-        read_only_fields = ["id"]
 
 
 class AudioSerializer(serializers.ModelSerializer):
@@ -142,4 +137,3 @@ class AudioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
         exclude = []
-        read_only_fields = ["id"]

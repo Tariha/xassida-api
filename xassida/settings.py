@@ -29,8 +29,6 @@ SECRET_KEY = "django-insecure-1ywp2o9jl4ir2&k3(^%q$od5-mmlhgj4cz2we5&r(6$s)zm_s3
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 
-APPEND_SLASH = True
-
 # Application definition
 SITE_ID = 1
 
@@ -100,7 +98,8 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ]
+    ],
+    'APPEND_SLASH': False,
 }
 
 WSGI_APPLICATION = "xassida.wsgi.application"

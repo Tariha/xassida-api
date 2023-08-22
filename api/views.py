@@ -102,7 +102,7 @@ class AudioViewSet(ModelViewSet):
     "Audio Model ViewSet"
     queryset = Audio.objects.all()
     serializer_class = AudioSerializer
-    filterset_fields = ["reciter__tariha"]
+    filterset_fields = ["reciter__tariha", "xassida"]
     pagination_class = CustomPagination
     permission_classes = [IsAdminOrReadOnly]
 
