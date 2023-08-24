@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="audio",
             name="file",
-            field=models.FileField(upload_to=api.models.upload_path),
+            field=models.FileField(upload_to=api.models.upload_audio),
         ),
     ]

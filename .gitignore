@@ -1,5 +1,6 @@
 db.sqlite3
 assets
+media
 **/__pycache__
 quran-simple.txt
 env/

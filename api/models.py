@@ -4,8 +4,16 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
 
 
-def upload_path(instance, filename):
-    return f"{filename}"
+def upload_author(instance, filename):
+    return f"images/authors/{instance.slug}/{filename}"
+
+
+def upload_reciter(instance, filename):
+    return f"images/reciters/{instance.slug}/{filename}"
+
+
+def upload_audio(instance, filename):
+    return f"audios/{instance.reciter.slug}/{filename}"
 
 
 class EnumTariha(models.TextChoices):
@@ -37,15 +45,22 @@ class Reciter(models.Model):
 
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
-    picture = models.ImageField(blank=True, null=True)
+    picture = models.ImageField(upload_to=upload_reciter, blank=True, null=True)
     tariha = models.CharField(max_length=15, choices=EnumTariha.choices)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def delete(self):
+        self.picture.delete()
+        return super().delete()
+
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ["name"]
 
 
 class Author(models.Model):
@@ -53,12 +68,16 @@ class Author(models.Model):
 
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
-    picture = models.ImageField(upload_to=upload_path, blank=True, null=True)
+    picture = models.ImageField(upload_to=upload_author, blank=True, null=True)
     tariha = models.CharField(max_length=15, choices=EnumTariha.choices)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    def delete(self):
+        self.picture.delete()
+        return super().delete()
 
     def __str__(self):
         name = self.name.replace("-", " ").replace("_", " ")
@@ -158,7 +177,7 @@ class Audio(models.Model):
 
     xassida = models.ForeignKey(Xassida, models.DO_NOTHING, related_name="audios")
     reciter = models.ForeignKey(Reciter, models.CASCADE, related_name="audios")
-    file = models.FileField(upload_to=upload_path)
+    file = models.FileField(upload_to=upload_audio)
     duration = models.DurationField(blank=True, null=True)
 
     class Meta:

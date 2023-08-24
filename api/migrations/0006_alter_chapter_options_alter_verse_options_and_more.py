@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             model_name="author",
             name="picture",
             field=models.ImageField(
-                blank=True, null=True, upload_to=api.models.upload_path
+                blank=True, null=True, upload_to=api.models.upload_author
             ),
         ),
         migrations.AlterField(
