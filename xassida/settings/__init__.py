@@ -7,6 +7,7 @@ load_dotenv()
 
 SECRET_KEY = get_random_secret_key()
 CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 SITE_ID = 1
@@ -141,7 +142,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-if os.environ.get("environment") == "production":
+if os.environ.get("DJANGO_ENVIRONMENT") == "production":
     from .production import *
 else:
     from .local import *

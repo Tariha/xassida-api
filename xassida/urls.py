@@ -21,6 +21,10 @@ from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 
 
+schema_url_patterns = [
+    path('api/', include('api.urls')),
+]
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("authentication.urls")),
@@ -29,7 +33,8 @@ urlpatterns = [
         title="xassida-api",
         description="L'api de xassida.sn",
         version="1.0.0",
-        urlconf='xassida.urls'
+        urlconf='xassida.urls',
+        patterns=schema_url_patterns
     ), name='openapi-schema'),
     path("", TemplateView.as_view(
         template_name='swagger-ui.html',

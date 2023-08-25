@@ -137,3 +137,8 @@ class AudioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
         exclude = []
+
+    def validate_file(self, value):
+        if not value.name.lower().endswith('.mp3'):
+            raise serializers.ValidationError("Only .mp3 files are allowed.")
+        return value
