@@ -2,8 +2,11 @@ import os
 from dotenv import load_dotenv
 from datetime import timedelta
 from django.core.management.utils import get_random_secret_key
+from pathlib import Path
 
 load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = get_random_secret_key()
 CORS_ALLOW_ALL_ORIGINS = True
