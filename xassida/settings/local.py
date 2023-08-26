@@ -11,10 +11,6 @@ DATABASES = {
     }
 }
 
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
-STATIC_ROOT = BASE_DIR / "static"
-MEDIA_ROOT = BASE_DIR / "media"
 
 # For redirection after mail validation
 LOGIN_URL = 'http://localhost:3000/login'
