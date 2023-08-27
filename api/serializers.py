@@ -139,6 +139,7 @@ class AudioSerializer(serializers.ModelSerializer):
         exclude = []
 
     def validate_file(self, value):
-        if not value.name.lower().endswith('.mp3'):
-            raise serializers.ValidationError("Only .mp3 files are allowed.")
+        allowed_extensions = ['.mp3', '.aac', '.m4a']
+        if not value.name.lower().endswith(tuple(allowed_extensions)):
+            raise serializers.ValidationError("Only .mp3/.aac/.m4a files are allowed.")
         return value
