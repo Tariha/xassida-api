@@ -182,6 +182,7 @@ class Audio(models.Model):
 
     class Meta:
         ordering = ["reciter__name"]
+        unique_together = ['xassida', 'reciter']
 
 
 class VerseTiming(models.Model):

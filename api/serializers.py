@@ -123,6 +123,13 @@ class XassidaSerializer(serializers.ModelSerializer):
         return list(audio_reciters)
 
 
+class SimpleXassidaSerializer(serializers.ModelSerializer):
+    """ Simple xassida serialize for nesting into audio """
+    class Meta:
+        model = Xassida
+        fields = ["id", "author", "name", "slug"]
+
+
 # Audio Serializers
 class VerseTimingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -131,12 +138,18 @@ class VerseTimingSerializer(serializers.ModelSerializer):
 
 
 class AudioSerializer(serializers.ModelSerializer):
-    reciter_info = ReciterSerializer(source='reciter', read_only=True)
-    xassida_info = XassidaSerializer(source='xassida', read_only=True)
+    reciters = serializers.SerializerMethodField(read_only=True)
+    reciter_info = ReciterSerializer(source="reciter", read_only=True)
+    xassida_info = SimpleXassidaSerializer(source='xassida', read_only=True)
 
     class Meta:
         model = Audio
         exclude = []
+
+    def get_reciters(self, audio):
+        audios = Audio.objects.filter(xassida=audio.xassida)
+        reciters = [audio.reciter for audio in audios]
+        return ReciterSerializer(reciters, many=True).data
 
     def validate_file(self, value):
         allowed_extensions = ['.mp3', '.aac', '.m4a']
